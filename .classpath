@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/ws-commons-util-1.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/xmlrpc-client-3.1.3.jar" sourcepath="/home/t-issi-/download/java/apache/httpcomponents-client-4.1.1/httpclient/src"/>
+	<classpathentry kind="lib" path="lib/xmlrpc-common-3.1.3.jar"/>
+	<classpathentry kind="lib" path="lib/xmlrpc-server-3.1.3.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
