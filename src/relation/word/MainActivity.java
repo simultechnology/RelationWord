@@ -4,17 +4,14 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class MainActivity extends Activity {
-    /** Called when the activity is first created. */
 	
+	/** 入力ワード */
 	private String word;
+	/** 表示リスト */
 	private ListView listView;
 	
     @Override
@@ -22,45 +19,31 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-		
-        final EditText inputForm = (EditText) findViewById(R.id.input_form);
-        
         listView = (ListView) findViewById(R.id.word_list);
-        
+        final EditText inputForm = (EditText) findViewById(R.id.input_form);
+        // 入力フォームに対してリスナーを設定
         inputForm.addTextChangedListener(new TextWatcher() {
 			
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// 入力フォームの値を取得入
 				word = inputForm.getText().toString();
-				System.out.println("word.length()  : " + word.length());
-				if (word.length() == 0) {
-					listView.removeAllViewsInLayout();
+				try {
+					// 非同期でAPI検索を呼出す
+					RelationSearchAsyncTask task = new RelationSearchAsyncTask(MainActivity.this);
+			        task.execute(null);
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-				else {
-				
-					try {
-						TranslateAsyncTask task = new TranslateAsyncTask(MainActivity.this);
-				        task.execute(null);
-						//TransLateService.translateEnglish(word.toString());
-					} catch (Exception e) {
-						// TODO 自動生成された catch ブロック
-						e.printStackTrace();
-					}
-				}
-				
 			}
-			
+
+			@Override
+			public void afterTextChanged(Editable s) {
+			}
+
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
-				// TODO 自動生成されたメソッド・スタブ
-				
-			}
-			
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO 自動生成されたメソッド・スタブ
-				
 			}
 		});
     }
