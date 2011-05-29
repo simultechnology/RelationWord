@@ -9,9 +9,11 @@ import java.util.Random;
 import org.xmlrpc.android.XMLRPCClient;
 import org.xmlrpc.android.XMLRPCException;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -68,6 +70,15 @@ public class RelationSearchAsyncTask extends AsyncTask<String, String, Void> {
 			}
 		}
 		
+		// 検索結果が存在する場合はキーボードを隠す処理
+		if (list.size() > 0) {
+			EditText inputForm = (EditText) activity.findViewById(R.id.input_form);
+			InputMethodManager inputMethodManager = (InputMethodManager) 
+			activity.getSystemService (Context.INPUT_METHOD_SERVICE); 
+			inputMethodManager.hideSoftInputFromWindow(inputForm.getWindowToken(), 0); 
+		}
+		
+		
 		// ListViewに表示するアダプタを作成
 		final ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity,
 				R.layout.row, R.id.inner_text, randomOrder(list));
@@ -85,7 +96,9 @@ public class RelationSearchAsyncTask extends AsyncTask<String, String, Void> {
 							LinearLayout linearView = (LinearLayout)view;
 							TextView textview = (TextView) linearView.getChildAt(0);
 							EditText inputForm = (EditText) activity.findViewById(R.id.input_form);
-							inputForm.setText((String) textview.getText());
+							String selectedWord = (String) textview.getText();
+							activity.setWordSearchHistory(selectedWord);
+							inputForm.setText(selectedWord);
 							inputForm.setFocusable(false);
 							inputForm.setFocusableInTouchMode(true);
 							

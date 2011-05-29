@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dip"
+    >
+    <Button
+        android:id="@+id/google_search_button"
+        android:layout_width="150dip"
+        android:layout_height="wrap_content"
+        android:text="Google検索"
+        android:drawablePadding="10dip"
+        />
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="150dip"
+        android:layout_height="wrap_content"
+        android:text="戻る"
+        android:drawablePadding="10dip"
+        />
+</LinearLayout>
